@@ -1,0 +1,2 @@
+#!/bin/sh
+node "/c/Users/ferng/Documents/prog/js/react-tutorial/node_modules/webpack/bin/webpack.js"
