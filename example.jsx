@@ -1,17 +1,14 @@
-var Comment = React.createClass({
-  rawMarkup: function() {
-    var md = new Remarkable();
-    var rawMarkup = md.render(this.props.children.toString());
-    return { __html: rawMarkup };
-  },
+var React = require('react');
+var ReactDOM = require('react-dom');
 
+var Comment = React.createClass({
   render: function() {
     return (
       <div className="comment">
         <h2 className="commentAuthor">
           {this.props.activity}
         </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
+        {this.props.children.toString()}
       </div>
     );
   }
