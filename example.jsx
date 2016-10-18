@@ -59,7 +59,7 @@ var CommentBox = React.createClass({
       <div className="commentBox">
         <h1>Activity</h1>
         <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+        <ActivityForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
     );
   }
@@ -82,7 +82,7 @@ var CommentList = React.createClass({
   }
 });
 
-var CommentForm = React.createClass({
+var ActivityForm = React.createClass({
   getInitialState: function() {
     return {activity: '', distance: 0};
   },
@@ -104,16 +104,16 @@ var CommentForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
+      <form className="ActivityForm" onSubmit={this.handleSubmit}>
         <input
-          type="distance"
-          placeholder="Your name"
+          type="text"
+          placeholder="Activity"
           value={this.state.activity}
           onChange={this.handleAuthorChange}
         />
         <input
-          type="distance"
-          placeholder="Say something..."
+          type="text"
+          placeholder="Distance"
           value={this.state.distance}
           onChange={this.handleTextChange}
         />
