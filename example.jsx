@@ -39,26 +39,10 @@ var CommentBox = React.createClass({
         this.setState({ data: newComments });
 
         var xhr = new XMLHttpRequest();
-        xhr.open('PUT', 'myservice/user/1234');
+
+        xhr.open('POST', 'http://localhost:8080/api/comments');
         xhr.setRequestHeader('Content-Type', 'application/json');
-
-http://blog.garstasio.com/you-dont-need-jquery/ajax/
-
-
-        console.log(comment);
-        $.ajax({
-            url: this.props.url,
-            dataType: 'json',
-            type: 'POST',
-            data: comment,
-            success: function (data) {
-                this.setState({ data: data });
-            }.bind(this),
-            error: function (xhr, status, err) {
-                this.setState({ data: comments });
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+        xhr.send(JSON.stringify(comment));
     },
     getInitialState: function () {
         return { data: [] };
