@@ -1,9 +1,9 @@
 {
-  "name": "react-tutorial",
-  "version": "0.0.0",
+  "name": "runlogjs",
+  "version": "0.1.0",
   "private": true,
   "license": "see LICENSE file",
-  "description": "Code from the React tutorial.",
+  "description": "An activity log, mostly for exercise, mostly for running, mostly for fern",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.4.3",
@@ -26,21 +26,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/reactjs/react-tutorial.git"
+    "url": "https://github.com/ferng/runlogjs"
   },
   "keywords": [
-    "react",
-    "tutorial",
-    "comment",
-    "example"
+    "fern",
+    "exercise",
+    "running",
+    "log"
   ],
-  "author": "petehunt",
+  "author": "fern gonzalez",
   "bugs": {
-    "url": "https://github.com/reactjs/react-tutorial/issues"
+    "url": "https://github.com/ferng/runlogjs/issues"
   },
-  "homepage": "https://github.com/reactjs/react-tutorial",
+  "homepage": "https://thecrunchycorner.com/runlog",
   "engines": {
-    "node": "0.12.x"
+    "node": "6.5.x"
   },
   "babel": {
     "presets": [
