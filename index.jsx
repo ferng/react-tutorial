@@ -9,6 +9,7 @@ var Lap = React.createClass({
                     {this.props.unit}
                 </h2>
                 {this.props.children.toString()}
+                {this.props.time}
             </div>
         );
     }
@@ -46,12 +47,11 @@ var TopLevel = React.createClass({
     },
     componentDidMount: function () {
         this.getLaps();
-        setInterval(this.getLaps, this.props.pollInterval);
     },
     render: function () {
         return (
             <div className="topLevel">
-                <h1>Activity</h1>
+                <h1>-</h1>
                 <LapList data={this.state.data} />
                 <LapForm onLapSubmit={this.handleLapSubmit} />
             </div>
@@ -63,7 +63,7 @@ var LapList = React.createClass({
     render: function () {
         var lapNodes = this.props.data.map(function (lap) {
             return (
-                <Lap unit={lap.unit} key={lap.id}>
+                <Lap unit={lap.unit} time={lap.time} key={lap.id}>
                     {lap.distance}
                 </Lap>
             );
@@ -77,44 +77,62 @@ var LapList = React.createClass({
 });
 
 var LapForm = React.createClass({
+
     getInitialState: function () {
-        return { unit: '', distance: 0 };
+        return { unit: "value1", distance: 0, time: 0 };
     },
     handleUnitChange: function (e) {
         this.setState({ unit: e.target.value });
     },
+    handleTimeChange: function (e) {
+        this.setState({ time: e.target.value });
+    },
     handleDistanceChange: function (e) {
         this.setState({ distance: e.target.value });
     },
+
     handleSubmit: function (e) {
         e.preventDefault();
         var unit = this.state.unit.trim();
         var distance = this.state.distance;
-        if (!distance || !unit) {
+        var time = this.state.time;
+        if (!distance || !unit || !time) {
             return;
         }
-        this.props.onLapSubmit({ unit: unit, distance: distance });
-        this.setState({ unit: '', distance: 0 });
+        this.props.onLapSubmit({ unit: unit, distance: distance, time: time});
+        this.setState({ unit: "value1", distance: 0, time: 0 });
     },
+
+
     render: function () {
         return (
             <form className="LapForm" onSubmit={this.handleSubmit}>
                 <input
-                    type="text"
-                    placeholder="Activity"
-                    value={this.state.unit}
-                    onChange={this.handleUnitChange}
+                    type="time"
+                    placeholder="Time"
+                    value={this.state.time}
+                    onChange={this.handleTimeChange}
                     />
                 <input
-                    type="text"
+                    type="number"
                     placeholder="Distance"
                     value={this.state.distance}
                     onChange={this.handleDistanceChange}
                     />
+                <select
+                    value={this.state.unit}
+                    onChange={this.handleUnitChange}>
+                    <option value="value1">Value 1</option>
+                    <option value="value2">Value 2</option>
+                    <option value="value3">Value 3</option>
+                </select>
+
                 <input type="submit" value="Post" />
+
             </form>
         );
-    }
+    },
+
 });
 
 ReactDOM.render(

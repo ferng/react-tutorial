@@ -38,7 +38,8 @@ app.post('/api/laps', function(req, res) {
     var newLap = {
       id: Date.now(),
       unit: req.body.unit,
-      distance: req.body.distance,
+      distance: parseFloat(req.body.distance,10),
+      time: req.body.time
     };
     laps.push(newLap);
     fs.writeFile(DATA_FILE, JSON.stringify(laps, null, 4), function(err) {
