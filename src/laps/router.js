@@ -12,8 +12,7 @@ router.use(function timeLog(req, res, next) {
 });
 
 router.get('/', function(req, res) {
-    var thing = reader;
-console.log(thing);
+    reader.readAll(res);
 });
 
 
