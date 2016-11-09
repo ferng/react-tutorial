@@ -79,7 +79,7 @@ var LapList = React.createClass({
 var LapForm = React.createClass({
 
     getInitialState: function () {
-        return { unit: "value1", distance: 0, time: 0 };
+        return { unit: "value1", distance: 0, time: "00:00:00" };
     },
     handleUnitChange: function (e) {
         this.setState({ unit: e.target.value });
@@ -100,7 +100,7 @@ var LapForm = React.createClass({
             return;
         }
         this.props.onLapSubmit({ unit: unit, distance: distance, time: time});
-        this.setState({ unit: "value1", distance: 0, time: 0 });
+        this.setState({ unit: "value1", distance: 0, time: "00:00:00" });
     },
 
 
@@ -112,6 +112,7 @@ var LapForm = React.createClass({
                     placeholder="Time"
                     value={this.state.time}
                     onChange={this.handleTimeChange}
+                    step="1"
                     />
                 <input
                     type="number"

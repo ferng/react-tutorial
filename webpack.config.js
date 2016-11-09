@@ -3,10 +3,11 @@ var webpack = require("webpack");
 
 module.exports = {
     entry: {
-        app: ["./index.jsx"]
+        app: ["./public/index.jsx"]
     },
     output: {
         path: __dirname,
+        publicPath: "/public/",
         filename: "bundle.js"
     },
     module: {
