@@ -1,5 +1,7 @@
 var fs = require('fs');
 var path = require('path');
+// var log = require('/src/utils/logger.js').getLogger();
+
 var DATA_FILE = path.join(__dirname, '../../../data.json');
 
 exports.readAll = function(res) {

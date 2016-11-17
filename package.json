@@ -9,7 +9,8 @@
     "body-parser": "^1.4.3",
     "express": "^4.4.5",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "bunyan": "1.8.4"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
