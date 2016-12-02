@@ -1,7 +1,9 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var routeLaps = require('./src/laps/router.js');
+'use strict';
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const routeLaps = require('./src/laps/router.js');
 
 app.set('port', (process.env.PORT || 3000));
 

@@ -1,10 +1,12 @@
-var fs = require('fs');
-var path = require('path');
-var express = require('express');
-var router = express.Router();
-var reader = require('./data/readAllData.js');
+'use strict';
 
-var DATA_FILE = path.join(__dirname, '../../data.json');
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
+const router = new express.Router();
+const reader = require('./data/readAllData.js');
+
+const DATA_FILE = path.join(__dirname, '../../data.json');
 
 router.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
@@ -22,12 +24,12 @@ router.post('/', function(req, res) {
       console.error(err);
       process.exit(1);
     }
-    var laps = JSON.parse(data);
-    var newLap = {
+    let laps = JSON.parse(data);
+    let newLap = {
       id: Date.now(),
       unit: req.body.unit,
-      distance: parseFloat(req.body.distance,10),
-      time: req.body.time
+      distance: parseFloat(req.body.distance, 10),
+      time: req.body.time,
     };
     laps.push(newLap);
     fs.writeFile(DATA_FILE, JSON.stringify(laps, null, 4), function(err) {

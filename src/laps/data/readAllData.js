@@ -1,8 +1,10 @@
-var fs = require('fs');
-var path = require('path');
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
 // var log = require('/src/utils/logger.js').getLogger();
 
-var DATA_FILE = path.join(__dirname, '../../../data.json');
+const DATA_FILE = path.join(__dirname, '../../../data.json');
 
 exports.readAll = function(res) {
   fs.readFile(DATA_FILE, function(err, data) {
@@ -12,5 +14,4 @@ exports.readAll = function(res) {
     }
     res.json(JSON.parse(data));
   });
-} 
-
+};
