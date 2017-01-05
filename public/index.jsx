@@ -1,10 +1,10 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+let React = require('react');
+let ReactDOM = require('react-dom');
 
-var Lap = React.createClass({
-    render: function () {
+let Lap = React.createClass({
+    render: function() {
         return (
-            <div className="lap">
+            <div className='lap'>
                 <h2 className="lapHeader">
                     {this.props.unit}
                 </h2>
@@ -12,43 +12,42 @@ var Lap = React.createClass({
                 {this.props.time}
             </div>
         );
-    }
+    },
 });
 
-var TopLevel = React.createClass({
-    getLaps: function () {
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', "/api/laps?_=1476854515917");
-        var msg;
-        xhr.onload = function () {
+let TopLevel = React.createClass({
+    getLaps: function() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', '/api/laps?_=1476854515917');
+        let msg;
+        xhr.onload = function() {
             if (xhr.status === 200) {
                 msg = JSON.parse(xhr.responseText);
-                this.setState({ data: msg });
+                this.setState({data: msg});
             }
         }.bind(this);
 
         xhr.send();
     },
-    handleLapSubmit: function (lap) {
-        var laps = this.state.data;
+    handleLapSubmit: function(lap) {
+        let laps = this.state.data;
         lap.id = Date.now();
-        var newLaps = laps.concat([lap]);
-        this.setState({ data: newLaps });
+        let newLaps = laps.concat([lap]);
+        this.setState({data: newLaps});
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
 
         xhr.open('POST', '/api/laps');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(lap));
     },
-    getInitialState: function () {
-        return { data: [] };
+    getInitialState: function() {
+        return {data: []};
     },
-    componentDidMount: function () {
+    componentDidMount: function() {
         this.getLaps();
     },
-    render: function () {
+    render: function() {
         return (
             <div className="topLevel">
                 <h1>-</h1>
@@ -56,12 +55,12 @@ var TopLevel = React.createClass({
                 <LapForm onLapSubmit={this.handleLapSubmit} />
             </div>
         );
-    }
+    },
 });
 
-var LapList = React.createClass({
-    render: function () {
-        var lapNodes = this.props.data.map(function (lap) {
+let LapList = React.createClass({
+    render: function() {
+        let lapNodes = this.props.data.map(function(lap) {
             return (
                 <Lap unit={lap.unit} time={lap.time} key={lap.id}>
                     {lap.distance}
@@ -73,38 +72,38 @@ var LapList = React.createClass({
                 {lapNodes}
             </div>
         );
-    }
+    },
 });
 
-var LapForm = React.createClass({
+let LapForm = React.createClass({
 
-    getInitialState: function () {
-        return { unit: "value1", distance: 0, time: "00:00:00" };
+    getInitialState: function() {
+        return {unit: 'value1', distance: 0, time: '00:00:00'};
     },
-    handleUnitChange: function (e) {
-        this.setState({ unit: e.target.value });
+    handleUnitChange: function(e) {
+        this.setState({unit: e.target.value});
     },
-    handleTimeChange: function (e) {
-        this.setState({ time: e.target.value });
+    handleTimeChange: function(e) {
+        this.setState({time: e.target.value});
     },
-    handleDistanceChange: function (e) {
-        this.setState({ distance: e.target.value });
+    handleDistanceChange: function(e) {
+        this.setState({distance: e.target.value});
     },
 
-    handleSubmit: function (e) {
+    handleSubmit: function(e) {
         e.preventDefault();
-        var unit = this.state.unit.trim();
-        var distance = this.state.distance;
-        var time = this.state.time;
+        let unit = this.state.unit.trim();
+        let distance = this.state.distance;
+        let time = this.state.time;
         if (!distance || !unit || !time) {
             return;
         }
-        this.props.onLapSubmit({ unit: unit, distance: distance, time: time});
-        this.setState({ unit: "value1", distance: 0, time: "00:00:00" });
+        this.props.onLapSubmit({unit: unit, distance: distance, time: time});
+        this.setState({unit: 'value1', distance: 0, time: '00:00:00'});
     },
 
 
-    render: function () {
+    render: function() {
         return (
             <form className="LapForm" onSubmit={this.handleSubmit}>
                 <input

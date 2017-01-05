@@ -1,5 +1,3 @@
-'use strict';
-
 const bunyan = require('bunyan');
 
 module.exports = {
@@ -14,11 +12,10 @@ module.exports = {
 };
 
 init = function() {
-    console.log('here');
     logger = bunyan.createLogger({
         name: 'runlogjs',
 
         stream: process.stdout,
-        level: 'info',
+        level: 'trace',
     });
 };
