@@ -7,10 +7,11 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.4.3",
+    "bunyan": "1.8.4",
     "express": "^4.4.5",
+    "mongodb": "^2.2.22",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "bunyan": "1.8.4"
+    "react-dom": "^15.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",

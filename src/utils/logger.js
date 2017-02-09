@@ -1,7 +1,24 @@
 const bunyan = require('bunyan');
+const config = require('../../config.js');
 
 let logger;
-let init;
+
+let init = function() {
+    logger = bunyan.createLogger({
+        name: config.logger.appname,
+
+    streams: [
+        {
+            path: config.logger.file_name,
+            level: config.logger.file_level,
+        },
+        {
+            stream: process.stdout,
+            level: config.logger.console_level,
+        },
+    ],
+});
+};
 
 module.exports = {
     logger: undefined,
@@ -14,19 +31,3 @@ module.exports = {
     },
 };
 
-init = function() {
-    logger = bunyan.createLogger({
-        name: 'runlogjs',
-
-    streams: [
-        {
-            path: 'runlog.log',
-            level: 'trace',
-        },
-        {
-            stream: process.stdout,
-            level: 'trace',
-        },
-    ],
-});
-};
