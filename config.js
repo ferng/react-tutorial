@@ -6,9 +6,9 @@ config.runlog.port = 3000;
 
 // database
 config.mongo = {};
-config.mongo.host = 'localhost';
+config.mongo.host = '127.0.0.1';
 config.mongo.port = 27017;
-config.mongo.database = 'laps';
+config.mongo.database = 'unicorns';
 
 // logger
 config.logger = {};

@@ -4,6 +4,7 @@ const express = require('express');
 const router = new express.Router();
 const reader = require('./data/readAllData.js');
 let log = require('../utils/logger.js').getLogger();
+const db = require('../utils/dbConnection.js');
 
 const DATA_FILE = path.join(__dirname, '../../data.json');
 
@@ -13,7 +14,8 @@ router.use(function timeLog(req, res, next) {
 });
 
 router.get('/', function(req, res) {
-    reader.readAll(res);
+    // reader.readAll(res);
+    db.insertOne('unicorns');
 });
 
 

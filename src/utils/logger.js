@@ -6,6 +6,7 @@ let logger;
 let init = function() {
     logger = bunyan.createLogger({
         name: config.logger.appname,
+        src: true,
 
     streams: [
         {

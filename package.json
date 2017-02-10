@@ -6,6 +6,7 @@
   "description": "An activity log, mostly for exercise, mostly for running, mostly for fern",
   "main": "server.js",
   "dependencies": {
+    "async": "^2.1.4",
     "body-parser": "^1.4.3",
     "bunyan": "1.8.4",
     "express": "^4.4.5",
