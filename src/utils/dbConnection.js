@@ -21,22 +21,25 @@ module.exports = {
         }
     },
 
-    insertOne: function(collectionName) {
+    insertOne: function(collectionName, document) {
         log.info('inserting into: ' + collectionName + conn);
         let collection = conn.collection(collectionName);
         log.info('afer getting coll');
-        collection.insert({
-            name: 'fern2',
-            gender: 'm',
-            weight: 450,
-            loves: ['cheese'],
-        },
+        collection.insert(document,
                 log.info('afer getting coll4'),
             function(err, result) {
                 log.info(result);
                 log.info(err);
             });
         log.info('afer getting coll2');
+    },
+
+    getAll: function(collectionName, callback) {
+        let collection = conn.collection(collectionName);
+      collection.find({}, {_id: 0}).toArray(function(err, docs) {
+          log.info(docs);
+          callback(docs);
+      });
     },
 };
 
