@@ -3,4 +3,4 @@ node_modules
 .DS_Store
 .vscode/settings.json
 bundle.js
-*log
+*log.json

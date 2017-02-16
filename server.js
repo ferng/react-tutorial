@@ -6,26 +6,38 @@ const config = require('./config.js');
 const log = require('./src/utils/logger.js').getLogger();
 const db = require('./src/utils/dbConnection.js');
 
-app.set('port', config.runlog.port);
+// initialize mongo db connection pool
+db.initPool(openDbErrorHandler);
 
+// initialize ap server
+app.set('port', config.runlog.port);
 app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(requestHandler);
+app.use('/api/laps', routeLaps);
+app.listen(app.get('port'), startServerErrorHandler);
 
-app.use(function(req, res, next) {
+
+// handlers
+function requestHandler(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'no-cache');
     next();
-});
-
-app.use('/api/laps', routeLaps);
-
-let myCallback = function(data) {
-    console.log('got data: ' + data);
 };
 
-db.initPool(myCallback);
+function openDbErrorHandler(err) {
+    if (err) {
+        log.fatal(err);
+        process.exit(1);
+    }
+};
 
-app.listen(app.get('port'), function() {
-    log.info('Server started: http://localhost:' + app.get('port') + '/');
-});
+function startServerErrorHandler(err) {
+    if (err) {
+        log.fatal(err);
+        process.exit(1);
+    } else {
+        log.info('Server started: http://localhost:' + app.get('port') + '/');
+    }
+};

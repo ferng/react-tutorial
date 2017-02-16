@@ -24,6 +24,17 @@
             "error",
             "global"
         ],
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    "FunctionDeclaration": false,
+                    "MethodDefinition": false,
+                    "ClassDeclaration": false,
+                    "ArrowFunctionExpression": false
+                }
+            }
+        ],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error"
     },

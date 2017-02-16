@@ -6,40 +6,45 @@ let conn = undefined;
 
 const url = 'mongodb://' + config.mongo.host + ':' + config.mongo.port + '/' + config.mongo.database;
 
-let init = function() {
-    log.info(url);
-    MongoClient.connect(url, function(err, db) {
-        conn = db;
-        log.info('Connected to mongodb');
-    });
+module.exports = {
+    initPool: intiPool,
+    insertOne: insertOne,
+    getAll: getAll,
 };
 
-module.exports = {
-    initPool: function() {
-        if (typeof conn == 'undefined') {
-            init();
-        }
-    },
 
-    insertOne: function(collectionName, document) {
+// db operations
+function intiPool(callback) {
+        log.debug('Attempting connection to mongodb on: ' + url);
+            MongoClient.connect(url, function(err, db) {
+            if (err) {
+                callback(err);
+                log.debug('Error connecting to mongodb');
+            } else {
+                conn = db;
+                log.debug('Connected to mongodb');
+                callback(null);
+            }
+        });
+    };
+
+function insertOne(collectionName, document) {
         log.info('inserting into: ' + collectionName + conn);
         let collection = conn.collection(collectionName);
         log.info('afer getting coll');
         collection.insert(document,
-                log.info('afer getting coll4'),
+            log.info('afer getting coll4'),
             function(err, result) {
                 log.info(result);
                 log.info(err);
             });
         log.info('afer getting coll2');
-    },
+    };
 
-    getAll: function(collectionName, callback) {
+    function getAll(collectionName, callback) {
         let collection = conn.collection(collectionName);
-      collection.find({}, {_id: 0}).toArray(function(err, docs) {
-          log.info(docs);
-          callback(docs);
-      });
-    },
-};
-
+        collection.find({}, {_id: 0}).toArray(function(err, docs) {
+            log.info(docs);
+            callback(docs);
+        });
+    };
