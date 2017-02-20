@@ -14,37 +14,45 @@ module.exports = {
 
 
 // db operations
-function intiPool(callback) {
+function intiPool() {
+    return new Promise(function(resolve, reject) {
         log.debug('Attempting connection to mongodb on: ' + url);
-            MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(url, function(err, db) {
             if (err) {
-                callback(err);
                 log.debug('Error connecting to mongodb');
+                reject(err);
             } else {
                 conn = db;
                 log.debug('Connected to mongodb');
-                callback(null);
             }
         });
-    };
+    });
+};
 
 function insertOne(collectionName, document) {
+    return new Promise(function(resolve, reject) {
         log.info('inserting into: ' + collectionName + conn);
         let collection = conn.collection(collectionName);
-        log.info('afer getting coll');
         collection.insert(document,
-            log.info('afer getting coll4'),
             function(err, result) {
                 log.info(result);
                 log.info(err);
             });
-        log.info('afer getting coll2');
-    };
+    });
+};
 
-    function getAll(collectionName, callback) {
+
+function getAll(collectionName) {
+    return new Promise(function(resolve, reject) {
         let collection = conn.collection(collectionName);
         collection.find({}, {_id: 0}).toArray(function(err, docs) {
-            log.info(docs);
-            callback(docs);
+            if (err) {
+                log.debug('Error connecting to mongodb');
+                reject(err);
+            } else {
+                log.debug(docs);
+                resolve(docs);
+            }
         });
-    };
+    });
+};
