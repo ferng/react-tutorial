@@ -2,7 +2,9 @@ const express = require('express');
 const router = new express.Router();
 let log = require('./utils/logger.js').getLogger();
 const db = require('./utils/dbConnection.js');
+const validator = require('./validation/lap.js');
 
+module.exports = router;
 
 router.use((req, res, next) => {
     log.debug(req.originalUrl);
@@ -18,19 +20,7 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req, res) => {
-    getLap(req)
+    validator.parseRequestLap(req)
         .then((results) => db.insertOne('laps', results))
         .catch((err) => log.error(err));
 });
-
-module.exports = router;
-
-function getLap(req) {
-    let blurb = {
-        id: Date.now(),
-        unit: req.body.unit,
-        distance: parseFloat(req.body.distance, 10),
-        time: req.body.time,
-    };
-    return Promise.resolve(blurb);
-};
